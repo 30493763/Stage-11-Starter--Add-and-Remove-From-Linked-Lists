@@ -90,6 +90,7 @@ public class SelectDelieveryAddress extends javax.swing.JFrame {
 
         btnDeletetAddress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDeletetAddress.setText("Delete Selected Address");
+        btnDeletetAddress.addActionListener(this::btnDeletetAddressActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,6 +170,15 @@ public class SelectDelieveryAddress extends javax.swing.JFrame {
         lblConfirmation.setText("New Default Address Added");
         showAllAddress();
     }//GEN-LAST:event_btnAddDefaultAddressActionPerformed
+
+    private void btnDeletetAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletetAddressActionPerformed
+        // TODO add your handling code here:
+        int indexOfAddress =  lstAddresses.getSelectedIndex();
+        loggedInZooKeeper.removeAddress(indexOfAddress);
+        lblConfirmation.setText("Address Deleted");
+        showAllAddress();
+
+    }//GEN-LAST:event_btnDeletetAddressActionPerformed
 
     /**
      * @param args the command line arguments
