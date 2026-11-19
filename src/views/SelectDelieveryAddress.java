@@ -150,33 +150,69 @@ public class SelectDelieveryAddress extends javax.swing.JFrame {
 
     private void btnAddAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAddressActionPerformed
         // TODO add your handling code here:
-        String address = txtNewAddress.getText();
-        loggedInZooKeeper.addAddress(address);
-        lblConfirmation.setText("New Address Added");
-        showAllAddress();
+        
+        try{
+            String address = txtNewAddress.getText();
+            if(!address.isBlank()){
+               loggedInZooKeeper.addAddress(address);
+               lblConfirmation.setText("New Address Added");
+               showAllAddress();
+            }
+            else{
+                lblConfirmation.setText("Error: Enter Default address first");
+            }
+        }
+        catch(Exception ex){
+            lblConfirmation.setText("Error: caught in Exception");
+        }
     }//GEN-LAST:event_btnAddAddressActionPerformed
 
     private void btnConfirmAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmAddressActionPerformed
         // TODO add your handling code here:
-        Order_Confirmation confirm = new Order_Confirmation(loggedInZooKeeper);
-        confirm.setVisible(true);
-        this.setVisible(false);
+        
+        if(lstAddresses.getSelectedIndex() != -1 ){ // error detection
+            Order_Confirmation confirm = new Order_Confirmation(loggedInZooKeeper);
+            confirm.setVisible(true);
+            this.setVisible(false);
+        }
+        else{
+            lblConfirmation.setText("Error: select address first");
+        }
+        
+
     }//GEN-LAST:event_btnConfirmAddressActionPerformed
 
     private void btnAddDefaultAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDefaultAddressActionPerformed
         // TODO add your handling code here:
-        String address = txtNewDefaultAddress.getText();
-        loggedInZooKeeper.addFirstAddress(address);
-        lblConfirmation.setText("New Default Address Added");
-        showAllAddress();
+        try{
+            String address = txtNewDefaultAddress.getText();
+            if(!address.isBlank()){
+                loggedInZooKeeper.addFirstAddress(address);
+                lblConfirmation.setText("New Default Address Added");
+                showAllAddress();
+            }
+            else{
+                lblConfirmation.setText("Error: Enter Default address first");
+            }
+        }
+        catch(Exception ex){
+            lblConfirmation.setText("Error: caught in Exception");
+        }
+        
     }//GEN-LAST:event_btnAddDefaultAddressActionPerformed
 
     private void btnDeletetAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletetAddressActionPerformed
         // TODO add your handling code here:
-        int indexOfAddress =  lstAddresses.getSelectedIndex();
-        loggedInZooKeeper.removeAddress(indexOfAddress);
-        lblConfirmation.setText("Address Deleted");
-        showAllAddress();
+          
+         if(lstAddresses.getSelectedIndex() != -1 ){ // error detection
+            int indexOfAddress =  lstAddresses.getSelectedIndex();
+            loggedInZooKeeper.removeAddress(indexOfAddress);
+            lblConfirmation.setText("Address Deleted");
+            showAllAddress();
+        }
+        else{
+            lblConfirmation.setText("Error: select address first");
+        }
 
     }//GEN-LAST:event_btnDeletetAddressActionPerformed
 
